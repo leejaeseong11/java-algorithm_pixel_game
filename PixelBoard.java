@@ -38,13 +38,13 @@ public class PixelBoard extends JComponent{
 		Font cr = new Font("Helvetica", Font.ITALIC, 8);
 
 		try {
-			bgimg = ImageIO.read(new File("board.png"));
-			redDolimg = ImageIO.read(new File("redDol.png"));
-			blueDolimg = ImageIO.read(new File("blueDol.png"));
-			player1img = ImageIO.read(new File("player1.jpg"));
-			player2img = ImageIO.read(new File("player2.jpg"));
-			arrow = ImageIO.read(new File("arrow.png"));
-			arrow2 = ImageIO.read(new File("arrow2.png"));
+			bgimg = ImageIO.read(new File("src/board.png"));
+			redDolimg = ImageIO.read(new File("src/redDol.png"));
+			blueDolimg = ImageIO.read(new File("src/blueDol.png"));
+			player1img = ImageIO.read(new File("src/player1.jpg"));
+			player2img = ImageIO.read(new File("src/player2.jpg"));
+			arrow = ImageIO.read(new File("src/arrow.png"));
+			arrow2 = ImageIO.read(new File("src/arrow2.png"));
 		} catch( Exception e ) {
 			System.out.println("IO Error");
 		}
