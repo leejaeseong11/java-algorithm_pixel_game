@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class PixelPlayer100 extends Player {
 	PixelPlayer100(int[][] map) { super(map); }
 
-	/*Scanner scan = new Scanner (System.in);
+/*	Scanner scan = new Scanner (System.in);
 
 	public Point nextPosition(Point lastPosition) {
 		Point nextPosition;
