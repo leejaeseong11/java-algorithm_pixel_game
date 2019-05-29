@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PixelPlayer100 extends Player {
 	PixelPlayer100(int[][] map) { super(map); }
-/*
+
 	Scanner scan = new Scanner (System.in);
 
 	public Point nextPosition(Point lastPosition) {
@@ -17,7 +17,7 @@ public class PixelPlayer100 extends Player {
 		nextPosition = new Point(y, x);
 		return nextPosition;
 	}
-*/
+/*
 	public Point nextPosition(Point lastPosition) {
 		int x = (int)lastPosition.getX(), y = (int)lastPosition.getY();
 		int count = 0, find = 0;
@@ -105,6 +105,6 @@ public class PixelPlayer100 extends Player {
 
 		nextPosition = new Point(x, y);
 		return nextPosition;
-	}
+	}*/
 
 }

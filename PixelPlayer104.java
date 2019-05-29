@@ -1,7 +1,7 @@
-import java.awt.*;
+import java.awt.Point;
 
-public class PixelPlayer06 extends Player {
-    PixelPlayer06(int[][] map) {
+public class PixelPlayer104 extends Player {
+    PixelPlayer104(int[][] map) {
         super(map);
     }
 
@@ -48,16 +48,11 @@ public class PixelPlayer06 extends Player {
         if (this.isWin()) {
             // 만약 무조건 이기는 수가 있으면 그 인덱스를 리턴
             nextPosition = new Point(myRow, myCol);
+            System.out.print("win");
             return nextPosition;
         }
 
-        lose_cnt_row = 0;
-        lose_cnt_col = 0;
-        // islose() 함수를 호출하여 무조건 지는 수가 있는지 판단
-        if (isLose() == true) {
-            // 만약 무조건 지는 수가 하나 있으면 막음
-            myMap[myRow][myCol] = 100;
-        }
+        
 
         // --- 위에 0 으로 초기화한 가중치맵에 가중치 할당 from ---
         for (int i = 0; i < 8; i++) {
@@ -104,6 +99,23 @@ public class PixelPlayer06 extends Player {
             }
         }
 
+     // islose() 함수를 호출하여 무조건 지는 수가 있는지 판단
+        if (isLose() == true) {
+            // 만약 무조건 지는 수가 하나 있으면 막음
+            nextPosition = new Point(myRow, myCol);
+            myMap[myRow][myCol] = 100;
+            if(lose_cnt_row == 1) {
+            	for(int i = 0; i < 8; i++)
+            		myMap[myRow][i] = 0;
+            }
+            else {
+            	for(int i = 0; i < 8; i++)
+            		myMap[i][myCol] = 0;
+            }
+            System.out.print("lose");
+            //return nextPosition;
+        }
+        
         // 가중치 재설정
         // 1. 상대방의 돌이나 나의 돌이 놓인 위치에 가중치를 -1로 설정
         for (int i = 0; i < 8; i++) {
@@ -142,9 +154,10 @@ public class PixelPlayer06 extends Player {
                 }
             }
 
-            if (best_col == 0 && best_row == 0) { // 나의 다음 수가 위험한 경우 = 최선의 수가 가중치가 0인 경우
+            if (best_col == 0 || best_row == 0) { // 나의 다음 수가 위험한 경우 = 최선의 수가 가중치가 0인 경우
                 nextPosition = new Point(row_index, lastCol);
-                break;
+                check = false;
+
             }
 
             if (best_row >= best_col) { // 행이동에 대한 가중치값이 열이동에 대한 가중치 값보다 높을 경우
@@ -286,10 +299,8 @@ public class PixelPlayer06 extends Player {
 
             }
         }
-        if (cnt == 1) {// 행 고정시 위험한 곳이 한 군데이면 true
-            if(this.OneMoreAnalysis(myRow, myCol, "col")) { lose_cnt_col = 2; }
+        if (cnt == 1) // 행 고정시 위험한 곳이 한 군데이면 true
             return true;
-        }
 
         lose_cnt_col = cnt;
 
@@ -397,10 +408,8 @@ public class PixelPlayer06 extends Player {
             }
         }
         // --- '\' 모양 분석 to ---
-        if (cnt == 1) { // 위험한 곳이 한 군데이면 true
-            if (this.OneMoreAnalysis(myRow, myCol, "row")) { lose_cnt_row = 2; }
+        if (cnt == 1) // 위험한 곳이 한 군데이면 true
             return true;
-        }
 
         lose_cnt_row = cnt;
 
@@ -533,17 +542,12 @@ public class PixelPlayer06 extends Player {
         if (opt.equals("row")) {
             for (int i = 0; i < PixelTester.SIZE_OF_BOARD; i++) {
                 // 해당 위치에 돌을 놓은 후 고려하는 조건부 검색 이기 때문에, 놓을 곳은 검색 제외
-                if (i == inputCol)
-                    continue;
-
                 if (lose_cnt_row >= 2) {
-                        for(int j = 0 ; j < PixelTester.SIZE_OF_BOARD; j ++) {
-                            if(isPossible(inputRow,j)) {
-                                myMap[inputRow][j] = 0;
-                            }
-                        }
+                        for(int j = 0 ; j < PixelTester.SIZE_OF_BOARD; j ++) { myMap[inputRow][j] = 0; }
                     return true;
                 }
+                if (i == inputCol)
+                    continue;
 
                 // --- 'ㄱ' 자 3 가지 모양 탐색 from (기본모양 조건 + 모양이 만들어질 수 없는 부분을 제외하는 조건) ---
                 // 'ㄱ' 자 중 오른쪽 아래 돌이 비어있을 경우 기준
@@ -628,11 +632,7 @@ public class PixelPlayer06 extends Player {
             for (int i = 0; i < PixelTester.SIZE_OF_BOARD; i++) {
                 // 해당 위치에 돌을 놓은 후 고려하는 조건부 검색 이기 때문에, 놓을 곳은 검색 제외
                 if (lose_cnt_col >= 2) {
-                    for(int j = 0 ; j < PixelTester.SIZE_OF_BOARD; j ++) {
-                        if(isPossible(inputRow,j)) {
-                            myMap[inputRow][j] = 0;
-                        }
-                    }
+                    for(int j = 0 ; j < PixelTester.SIZE_OF_BOARD; j ++) { myMap[inputRow][j] = 0; }
                     return true;
                 }
                 if (i == inputRow)
@@ -717,5 +717,4 @@ public class PixelPlayer06 extends Player {
         }
         // 만약 해당 위치에 돌을 놓아도, 다음 수가 위험하지 않다면 false 리턴
         return false;
-    }
-}
+    }}
