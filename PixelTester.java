@@ -47,13 +47,8 @@ public class PixelTester{
 
         final PixelBoard board = new PixelBoard(map);
 
-<<<<<<< HEAD
-        final Player p1 = new PixelPlayer06(map);
-        final Player p2 = new PixelPlayer102(map);
-=======
-        final Player p1 = new PixelPlayer100(map);
+        final Player p1 = new PixelPlayer102(map);
         final Player p2 = new PixelPlayer06(map);
->>>>>>> 08141a0e5efba1291a8f169191bf79d1f9680b15
         p1.setCurrentPosition(new Point(4,3));
         p2.setCurrentPosition(new Point(3,4));
 
