@@ -1,7 +1,7 @@
 import java.awt.*;
 
-public class PixelPlayer06 extends Player {
-    PixelPlayer06(int[][] map) {
+public class PixelPlayer103 extends Player {
+    PixelPlayer103(int[][] map) {
         super(map);
     }
 
